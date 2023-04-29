@@ -63,7 +63,7 @@ const Card = () => {
             <img className='h-80' src={e.img} />
             <h1><span className='text-gray-500'>Name : </span>{e.name}</h1>
             <h1 className='flex items-center '>
-              <span className='text-gray-500 mr-2'>Rating : </span>
+              <span className='text-gray-500 mr-1'>Rating : </span>
             
             <ReactStars
             size={20}
