@@ -4,7 +4,9 @@ const AddMovie = () => {
   const [form, setForm] = useState({
     title:"",
     year:"",
-    description:""
+    description:""  
+
+    
   });
   return (
     <div>
