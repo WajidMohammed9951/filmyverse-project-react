@@ -85,7 +85,7 @@ const AddMovie = () => {
               </div>
               <div class="p-2 w-full">
                 <div class="relative">
-                  <label for="message" class="leading-7 text-sm text-gray-300">About Movie</label>
+                  <label for="message" class="leading-7 text-sm text-gray-300">description</label>
                   <textarea
                     id="message"
                     name="message"
