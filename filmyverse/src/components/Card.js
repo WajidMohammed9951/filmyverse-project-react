@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Audio, ThreeDots } from 'react-loader-spinner';
 import ReactStars from 'react-stars'
 import { moviesRef } from '../firebase/Firebase';
+import { Link } from 'react-router-dom';
 
 
 const Card = () => {
@@ -14,7 +15,7 @@ const Card = () => {
       setLoading(true);
       const _data = await getDocs(moviesRef)
      _data.forEach((doc) => {
-      setdata((prv) => [...prv, {...(doc.data())}])
+      setdata((prv) => [...prv, {...(doc.data()), id:doc.id}])
      })
      setLoading(false);
 
@@ -28,7 +29,7 @@ const Card = () => {
         
           data.map((e, i) => {
             return (
-              <div key={i} className='Card p-1 shadow-lg cursor-pointer hover:translate-y-2  mt-6 transition-all duration-500'>
+              <Link to={'/detail/${e.id}'}><div key={i} className='Card p-1 shadow-lg cursor-pointer hover:translate-y-2  mt-6 transition-all duration-500'>
                 <img className="h-60 md:h-72 p-2" src={e.image} />
                 <h1><span className='text-gray-500'>Name : </span>{e.title}</h1>
                 <h1 className='flex items-center '>
@@ -42,7 +43,7 @@ const Card = () => {
                   />
                 </h1>
                 <h1><span className='text-gray-500'>Year : </span>{e.year}</h1>
-              </div>
+              </div></Link>
             )
           })
         
