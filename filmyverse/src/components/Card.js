@@ -29,7 +29,7 @@ const Card = () => {
         
           data.map((e, i) => {
             return (
-              <Link to={'/detail/${e.id}'}><div key={i} className='Card p-1 shadow-lg cursor-pointer hover:translate-y-2  mt-6 transition-all duration-500'>
+              <Link to={`/detail/${e.id}`}><div key={i} className='Card p-1 shadow-lg cursor-pointer hover:translate-y-2  mt-6 transition-all duration-500'>
                 <img className="h-60 md:h-72 p-2" src={e.image} />
                 <h1><span className='text-gray-500'>Name : </span>{e.title}</h1>
                 <h1 className='flex items-center '>
