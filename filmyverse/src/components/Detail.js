@@ -17,7 +17,7 @@ const Detail = () => {
   useEffect(() => {
     async function getData() {
       setLoading(true);
-      const _doc = doc(db, "movie", id);
+      const _doc = doc(db, "movies", id);
       const _data = await getDoc(_doc);
       setData(_data.data());
       setLoading(false);

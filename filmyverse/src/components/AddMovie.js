@@ -20,10 +20,15 @@ const AddMovie = () => {
     swal({
       title:"successfully Added",
       icon: "success",
-      buttons:"false",
+      buttons: false,
       timer:3000
     })
-    setloading(true);
+    setForm({
+      title: "",
+      year: "",
+      description: "",
+      image: ""
+    })
   } catch(err){
     swal({
       title: err,
@@ -32,6 +37,7 @@ const AddMovie = () => {
       timer:3000
     })
   }
+  setloading(false);
   }
 
   return (
