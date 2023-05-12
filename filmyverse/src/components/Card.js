@@ -14,23 +14,23 @@ const Card = () => {
   useEffect(() => {
     async function getData() {
       setLoading(true);
-      const _data = await getDocs(moviesRef)
+      const _data = await getDocs(moviesRef);
      _data.forEach((doc) => {
       setdata((prv) => [...prv, {...(doc.data()), id:doc.id}])
      })
      setLoading(false);
 
-    };
+    }
     getData();
 
-  }, [])
+  },[])
   return (
     <div className='flex flex-wrap justify-between font-bold px-3 mt-3 ' >
       {loading ? <div className=' w-full flex justify-center items-center h-96 '><ThreeDots height={40} color="white" /></div> :
         
           data.map((e, i) => {
             return (
-              <Link to={`/detail/${e.id}`}><div key={i} className='ard font-medium shadow-lg p-2 hover:-translate-y-3 cursor-pointer mt-6 transition-all duration-500 bg-slate-900'>
+              <Link to={`/detail/${e.id}`}><div key={i} className='ard font-medium shadow-lg p-2 hover:-translate-y-3 cursor-pointer mt-6 transition-all duration-500 bg-slate-1000'>
                 <img className="h-70 md:h-72 p-2 " src={e.image} />
                 <h1><span className='text-gray-500'>Name : </span>{e.title}</h1>
                 <h1 className='flex items-center '>
