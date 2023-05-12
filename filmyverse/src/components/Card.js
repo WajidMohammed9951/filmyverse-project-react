@@ -1,9 +1,10 @@
 import { getDocs } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
-import { Audio, ThreeDots } from 'react-loader-spinner';
+import { ThreeDots } from 'react-loader-spinner';
 import ReactStars from 'react-stars'
 import { moviesRef } from '../firebase/Firebase';
 import { Link } from 'react-router-dom';
+
 
 
 const Card = () => {
@@ -35,7 +36,7 @@ const Card = () => {
                 <h1 className='flex items-center '>
                   <span className='text-gray-500 mr-1'>Rating : </span>
 
-                  
+
 
                   <ReactStars
                     size={20}
