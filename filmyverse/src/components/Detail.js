@@ -30,7 +30,7 @@ const Detail = () => {
     <div className=' p-4 mt-4 flex flex-col md:flex-row items-center md:items-start justify-center'>
       {loading ? <div className='h-[26rem]   flex w-full justify-center items-center'><Bars color='white' /> </div> :
         <>
-          <img className='h-96 block md:sticky top-24' src={data.image} />
+          <img className='h-[28rem] block md:sticky top-24' src={data.image} />
           <div className='md:ml-4 ml-0 md:w-1/2 mt-4'>
             <h1 className='text-3xl font-bold text-gray-400'>{data.title} <span className='text-xl'>({data.year})</span></h1>
             <ReactStars
