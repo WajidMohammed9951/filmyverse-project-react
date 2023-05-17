@@ -12,7 +12,9 @@ const Detail = () => {
     title: "",
     year: "",
     description: "",
-    image: ""
+    image: "",
+    rating: 0,
+    rated: 0
   })
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -36,11 +38,11 @@ const Detail = () => {
             <ReactStars
               size={20}
               half={true}
-              value={5}
+              value={data.rating/data.rated}
               edit={false}
             />
             <p className='text-xl mt-3'>{data.description}</p>
-            <Reviews/>
+            <Reviews id={id} prevRating={data.rating} userRated={data.rated}/>
           </div>
         </>
       }
