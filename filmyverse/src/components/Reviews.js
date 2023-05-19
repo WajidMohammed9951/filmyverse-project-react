@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import ReactStars from 'react-stars'
 import { reviewsRef, db } from '../firebase/Firebase';
-import { addDoc,doc, updateDoc, query, where, getDocs } from 'firebase/firestore';
+import { addDoc, doc, updateDoc, query, where, getDocs } from 'firebase/firestore';
 import { TailSpin, ThreeDots } from 'react-loader-spinner';
 import swal from 'sweetalert';
 
 
-const Reviews = ({ id, prevRating, userRated}) => {
+const Reviews = ({ id, prevRating, userRated }) => {
   const [rating, setRating] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [reviewsLoading, setreviewsLoading] = useState(false);
+  const [reviewsLoading, setReviewsLoading] = useState(false);
   const [form, setForm] = useState("");
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
+  // const [newAdded, setNewAdded] = useState(0);
+
+
 
   const sendReview = async () => {
     setLoading(true);
@@ -27,13 +30,15 @@ const Reviews = ({ id, prevRating, userRated}) => {
       })
 
       const ref = doc(db, "movies", id);
-    await updateDoc(ref, {
-      rating: prevRating + rating,
-      rated: userRated + 1
+      await updateDoc(ref, {
+        rating: prevRating + rating,
+        rated: userRated + 1
 
-    } )
+      })
       setRating(0);
       setForm("");
+      // setNewAdded(newAdded + 1);
+
       swal({
         title: "review sent",
         icon: "success",
@@ -51,19 +56,22 @@ const Reviews = ({ id, prevRating, userRated}) => {
     setLoading(false);
 
   }
-  useEffect (() =>{
+  useEffect(() => {
     async function getData() {
-      setreviewsLoading = (true);
+      setReviewsLoading = (true);
       let quer = query(reviewsRef, where('movieid', '==', id))
       const querySnapshot = await getDocs(quer);
 
       querySnapshot.forEach((doc) => {
         setData((prev) => [...prev, doc.data()])
-    })
-      setreviewsLoading = (false);
-      
+      })
+      setReviewsLoading = (false);
+
     }
+    getData();
+
   })
+
 
   return (
     <div className='mt-6 border-t-2 border-gray-600 w-full text-xl '>
@@ -84,16 +92,29 @@ const Reviews = ({ id, prevRating, userRated}) => {
         {loading ? <TailSpin height={20} color='white' /> : 'share'}
       </button>
       {reviewsLoading ?
-         <div className='mt-6 flex justify-center '><ThreeDots height={10} color='white'/></div>
-      :
-      <div>
-        {data.map ((e, i) => {
-          return(
-            <div key={i}>{e.thought}</div>
-          )
-        })}
+        <div className='mt-6 flex justify-center '><ThreeDots height={10} color='white' /></div>
+        :
+        <div className='mt-4 p-2'>
+          {data.map((e, i) => {
+            return (
+              <div className='bg-gray-900 p-2 w-full mt-2 border-b border-gray-600' key={i}>
+                <div className='flex'>
+                  <p className='text-blue-800'>{e.name}</p>
+                  <p>{new Date(e.timestamp).toLocaleString()}</p>
+                  <ReactStars
+                            size={15}
+                            half={true}
+                            value={e.rating}
+                            edit={false}
+                        />
 
-      </div>
+                        <p>{e.thought}</p>
+                </div>
+              </div>
+            )
+          })}
+
+        </div>
 
       }
     </div>
